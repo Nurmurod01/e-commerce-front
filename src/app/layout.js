@@ -1,6 +1,24 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import StoreProvider from "./Storeprovider";
 
+import Link from "next/link";
+import {
+  LayoutDashboard,
+  Package,
+  ListIcon,
+  ShoppingCart,
+  Users,
+} from "lucide-react";
+import { ToastContainer } from "react-toastify";
+
+const sidebarItems = [
+  { icon: LayoutDashboard, label: "Dashboard", href: "/" },
+  { icon: Package, label: "Mahsulotlar", href: "/products" },
+  { icon: ListIcon, label: "Kategoriyalar", href: "/categories" },
+  { icon: ShoppingCart, label: "Buyurtmalar", href: "/orders" },
+  { icon: Users, label: "Foydalanuvchilar", href: "/users" },
+];
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -19,11 +37,34 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <StoreProvider>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <ToastContainer />
+          <div className="flex h-screen bg-gray-100">
+            <aside className="w-64 bg-white shadow-md">
+              <nav className="p-4">
+                <h1 className="text-2xl font-bold mb-6">Admin Panel</h1>
+                <ul>
+                  {sidebarItems.map((item) => (
+                    <li key={item.href} className="mb-2">
+                      <Link
+                        href={item.href}
+                        className="flex items-center p-2 rounded hover:bg-gray-200"
+                      >
+                        <item.icon className="mr-2 h-5 w-5" />
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </aside>
+            <main className="flex-1 p-8 overflow-y-auto">{children}</main>
+          </div>
+        </body>
+      </StoreProvider>
     </html>
   );
 }
