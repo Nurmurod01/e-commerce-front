@@ -11,6 +11,7 @@ import {
   Users,
 } from "lucide-react";
 import { ToastContainer } from "react-toastify";
+import AuthLoader from "@/components/AuthLoader";
 
 const sidebarItems = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/" },
@@ -42,6 +43,7 @@ export default function RootLayout({ children }) {
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           <ToastContainer />
+          <AuthLoader />
           <div className="flex h-screen bg-gray-100">
             <aside className="w-64 bg-white shadow-md">
               <nav className="p-4">

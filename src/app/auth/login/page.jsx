@@ -6,7 +6,7 @@ import { useLogInMutation } from "@/lib/service/api";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useSelector, useDispatch } from "react-redux";
-import { login as setToken } from "@/store/authSlice";
+import { login as setToken } from "@/lib/slice/authSlice";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -36,7 +36,7 @@ export default function LoginPage() {
         return;
       }
 
-      dispatch(setToken({ user: result.user, token: result.accessToken }));
+      dispatch(login({ user: result.user, token: result.accessToken }));
       toast.success("Admin sifatida muvaffaqiyatli login bo'ldingiz!");
     } catch (error) {
       toast.error(error.data?.message || "Kirishda xatolik yuz berdi.");

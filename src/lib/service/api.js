@@ -164,6 +164,9 @@ const api = createApi({
       }),
       invalidatesTags: ["Orders"],
     }),
+    logIn: builder.mutation({
+      query: (data) => ({ url: "/auth/login", method: "POST", body: data }),
+    }),
   }),
 });
 
@@ -188,6 +191,8 @@ export const {
   useGetOneOrdersQuery,
   useAddOrderMutation,
   useUpdateOrderMutation,
+
+  useLogInMutation,
 } = api;
 
 export default api;
