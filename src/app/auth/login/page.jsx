@@ -36,7 +36,13 @@ export default function LoginPage() {
         return;
       }
 
-      dispatch(login({ user: result.user, token: result.accessToken }));
+      dispatch(
+        setToken({
+          user: result.user,
+          token: result.accessToken,
+          role: result.user.role,
+        })
+      );
       toast.success("Admin sifatida muvaffaqiyatli login bo'ldingiz!");
     } catch (error) {
       toast.error(error.data?.message || "Kirishda xatolik yuz berdi.");
