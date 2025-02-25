@@ -13,7 +13,7 @@ export default function OrdersPage() {
   const handleUpdateStatus = async (id, status) => {
     setUpdatingId(id);
     try {
-      await updateOrder({ id, status }).unwrap(); // unwrap() bilan aniq natijani olish
+      await updateOrder({ id, status }).unwrap();
     } catch (err) {
       console.error("Update failed:", err);
     } finally {
